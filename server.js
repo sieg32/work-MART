@@ -2,7 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
 const sellerRoute = require('./routes/seller');
-const errorMiddleware = require('./middlewares/errorMiddleware')
+const productRoute = require('./routes/product');
+const errorHandler = require('./middlewares/errorMiddleware')
 
 
 
@@ -14,9 +15,11 @@ server.use(express.static('./public'));
 
 
 server.use('/seller', sellerRoute);
+server.use('/product', productRoute);
 
 
-server.use(errorMiddleware);
+
+server.use(errorHandler);
 
 
 

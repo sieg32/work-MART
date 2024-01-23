@@ -1,5 +1,5 @@
 
-const fileErrorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
   
     console.error(err.stack); // Log the error for debugging purposes
     
@@ -16,5 +16,5 @@ const fileErrorHandler = (err, req, res, next) => {
     
   };
   
-  module.exports = fileErrorHandler;
+  module.exports = errorHandler;
   

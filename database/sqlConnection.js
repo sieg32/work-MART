@@ -6,7 +6,7 @@ const mysql = require('mysql2');
         host:'localhost',
         password:'Airtel@123',
         user:'yogesh',
-        database:'mydb',
+        database:'MART',
         idleTimeout: 60000
     }).promise();
 

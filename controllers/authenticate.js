@@ -10,7 +10,7 @@ const saltRounds = 10;
     const {name, phone , password , city, address, country, email} = req.body;
 
     if(phone && phone.length <10){
-        if (!/^\d{10}$/.test(phoneNumber)) {
+        if (!/^\d{10}$/.test(phone)) {
             return res.status(400).json({ error: 'Invalid phone number' });
           }
         
@@ -63,7 +63,7 @@ const saltRounds = 10;
      const success = await bcrypt.compare(password, information.password );
     if(success){
 
-        const token =await jwt.sign({id : information.id_seller, phone: information.seller_phone }, process.env.JWT_SECRET,{expiresIn: '24h'} );
+        const token = jwt.sign({id : information.id_seller, phone: information.seller_phone }, process.env.JWT_SECRET,{expiresIn: '24h'} );
 
         res.status(200).json({login:"success", token: token});
     }else{
