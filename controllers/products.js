@@ -171,8 +171,29 @@ async function updateProduct(req, res) {
 
 
 
-async function deleteProduct(req,res){
-    res.send('good');
-}  
+  async function deleteProduct(req, res) {
+    const productId = req.params.id;
+  
+    try {
+      // Check if the product exists
+      const existingProduct = await dbPool.query('SELECT * FROM product WHERE idproduct = ?', [productId]);
+  
+      if (existingProduct.length === 0) {
+        return res.status(404).send('Product not found');
+      }
+  
+      // Delete the product
+      const deleteResult = await dbPool.query('DELETE FROM product WHERE idproduct = ?', [productId]);
+  
+      if (deleteResult[0].affectedRows > 0) {
+        res.status(200).send('Product deleted successfully');
+      } else {
+        res.status(500).send( 'failed to delete product');
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  }
   
 module.exports = { addProduct, updateProduct, deleteProduct };
