@@ -2,7 +2,7 @@ const dbPool = require("../database/sqlConnection");
 
 
 async function search(req, res) {
-    const { query, category, subcategory, seller , priceMax, priceMin, idproduct, sort} = req.query;
+    const { query, category, subcategory, seller , priceMax, priceMin, idproduct, sort, page = 1, pageSize = 30} = req.query;
   
     // Base query without any conditions
     let queryStr = "SELECT name, idproduct, thumbnail, category, subcategory, priceUP, priceLOW, postTime FROM product";
@@ -75,6 +75,10 @@ async function search(req, res) {
           // No sorting specified, use default ordering
           break;
       }
+    
+      const offset = (page - 1) * pageSize;
+      queryStr += ` LIMIT ? OFFSET ?`;
+      values.push(Number(pageSize), offset);
     
   
     try {

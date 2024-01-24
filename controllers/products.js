@@ -196,7 +196,7 @@ async function updateProduct(req, res) {
     }
   }
 
-  
+
 
   async function getProductOfSeller(req, res) {
     try {
@@ -213,6 +213,20 @@ async function updateProduct(req, res) {
       return res.status(500).json({ error: "Internal Server Error" });
     }
   }
+
+  async function getProduct(req, res){
+    const id = req.params.id;
+    try{
+        const data = await dbPool.query('SELECT * FROM product WHERE idproduct = ?', [id])
+        if(data[0].length === 0){
+            return res.status(404).send('product not found');
+        }
+        res.send(data[0]);
+    }catch(error){
+        console.log(error)
+        res.status(500).send('internal server error')
+    }
+  }
   
   
-module.exports = { addProduct, updateProduct, deleteProduct, getProductOfSeller };
+module.exports = { addProduct, updateProduct, deleteProduct, getProductOfSeller, getProduct};
