@@ -84,7 +84,7 @@ async function updateProduct(req, res) {
       // Check if the product exists
       const existingProduct = await dbPool.query('SELECT * FROM product WHERE idproduct = ?', [productId]);
   
-      if (existingProduct.length === 0) {
+      if (existingProduct[0].length === 0) {
         return res.status(404).send("Product not found");
       }
   
@@ -195,5 +195,24 @@ async function updateProduct(req, res) {
       res.status(500).send('Internal Server Error');
     }
   }
+
   
-module.exports = { addProduct, updateProduct, deleteProduct };
+
+  async function getProductOfSeller(req, res) {
+    try {
+      const data = await dbPool.query('SELECT * FROM product WHERE idseller = ?', [req.params.id]);
+  
+      if (data[0].length === 0) {
+        console.log('not found');
+        return res.status(404).json({ error: "Products not found" });
+      }
+  
+      return res.status(200).json({ products: data[0] });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+  
+  
+module.exports = { addProduct, updateProduct, deleteProduct, getProductOfSeller };

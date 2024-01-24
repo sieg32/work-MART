@@ -2,7 +2,7 @@ const express = require("express");
 const route = express.Router();
 const { uploadProductImage } = require("../multer/multerConfig");
 
-const { addProduct, updateProduct, deleteProduct } = require("../controllers/products");
+const { addProduct, updateProduct, deleteProduct, getProductOfSeller } = require("../controllers/products");
 
 route.post(
   "/addProduct/:id",
@@ -23,5 +23,7 @@ route.patch(
 );
 
 route.delete('/deleteProduct/:id',deleteProduct);
+
+route.get('/user/:id', getProductOfSeller);
 
 module.exports = route;
