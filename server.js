@@ -4,6 +4,7 @@ dotenv.config();
 const sellerRoute = require('./routes/seller');
 const productRoute = require('./routes/product');
 const searchRoute = require('./routes/search');
+const userRoute = require('./routes/user')
 const errorHandler = require('./middlewares/errorMiddleware')
 
 
@@ -19,6 +20,7 @@ server.use('/seller', sellerRoute);
 server.use('/product', productRoute);
 
 server.use('/search', searchRoute);
+server.use('/user', userRoute)
 
 
 server.use(errorHandler);

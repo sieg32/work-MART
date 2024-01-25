@@ -1,4 +1,4 @@
-const { flushSync } = require("react-dom");
+
 const dbPool = require("../database/sqlConnection");
 const fsPromises = require('fs').promises;
 
@@ -227,9 +227,9 @@ async function deleteProduct(req, res) {
 
     async function delFile(filepath) {
       try {
-        console.log('Deleting file:', filepath); // Log the file path
+        
         await fsPromises.unlink(workdir + '/public/' + filepath);
-        console.log('File deleted successfully:', filepath);
+        
       } catch (error) {
         console.error('Error deleting file:', error);
         throw error; // Re-throw the error to be caught in the calling function
@@ -238,7 +238,7 @@ async function deleteProduct(req, res) {
     
     try {
       await delFile(existingProduct[0][0].thumbnail);
-      console.log(existingProduct[0][0]);
+    
     
       // Convert productImage to an array if it's not already
       const productImages = Array.isArray(existingProduct[0][0].productImage)
