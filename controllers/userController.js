@@ -88,4 +88,9 @@ async function updateUser(req, res){
     }
 }
 
-module.exports = {getUser, updateUser};
+
+async function updateProfile(req,res){
+    res.status(200).send('profile updated')
+}
+
+module.exports = {getUser, updateUser, updateProfile};

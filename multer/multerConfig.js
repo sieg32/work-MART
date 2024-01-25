@@ -1,6 +1,6 @@
 const multer = require('multer');
 const fs = require('fs');
-
+const path = require('path');
 
 
 const allowedFileTypes = ['image/jpeg', 'image/png'];
@@ -36,7 +36,9 @@ const storageProfile = multer.diskStorage({
         cb(null, userFolderPath);
     },
     filename: function (req, file, cb) {
-        cb(null, 'profile-' + file.originalname);
+        
+        const extension = path.extname(file.originalname);
+        cb(null, 'profile' + extension);
     }
 });
 

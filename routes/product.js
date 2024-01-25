@@ -2,10 +2,10 @@ const express = require("express");
 const route = express.Router();
 const { uploadProductImage } = require("../multer/multerConfig");
 
-const { addProduct, updateProduct, deleteProduct, getProductOfSeller, getProduct } = require("../controllers/products");
+const { addProduct, updateProduct, deleteProduct, getProductOfSeller, getProductById } = require("../controllers/products");
 const authorize = require('../middlewares/authorization');
 route.post(
-  "/addProduct/:id",[authorize,
+  "/:id",[authorize,
   uploadProductImage.fields([
     { name: "thumbnail", maxCount: 1 },
     { name: "productImage", maxCount: 5 },
@@ -14,7 +14,7 @@ route.post(
 );
 
 route.patch(
-  "/updateProduct/:id",[authorize,
+  "/:id",[authorize,
   uploadProductImage.fields([
     { name: "thumbnail", maxCount: 1 },
     { name: "productImage", maxCount: 5 },
@@ -22,10 +22,10 @@ route.patch(
   updateProduct]
 );
 
-route.delete('/deleteProduct/:id',authorize,deleteProduct);
+route.delete('/:id',authorize,deleteProduct);
 
 route.get('/user/:id', getProductOfSeller);
 
-route.get('/:id', getProduct);
+route.get('/:id', getProductById);
 
 module.exports = route;

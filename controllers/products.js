@@ -295,7 +295,7 @@ async function getProductOfSeller(req, res) {
   }
 }
 
-async function getProduct(req, res) {
+async function getProductById(req, res) {
   const id = req.params.id;
   try {
     const data = await dbPool.query(
@@ -317,5 +317,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProductOfSeller,
-  getProduct,
+  getProductById,
 };

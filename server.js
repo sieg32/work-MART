@@ -16,11 +16,11 @@ server.use(express.json());
 server.use(express.static('./public'));
 
 
-server.use('/seller', sellerRoute);
-server.use('/product', productRoute);
+server.use('/api/seller', sellerRoute);
+server.use('/api/product', productRoute);
 
-server.use('/search', searchRoute);
-server.use('/user', userRoute)
+server.use('/api/search', searchRoute);
+server.use('/api/user', userRoute)
 
 
 server.use(errorHandler);
